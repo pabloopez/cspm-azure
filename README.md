@@ -1,0 +1,2 @@
+# instruqt-assets
+# cspm-azure
