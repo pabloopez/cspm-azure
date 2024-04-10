@@ -10,8 +10,8 @@ resource "azurerm_resource_group" "example" {
   }
 }
 
-resource "azurerm_storage_account" "my_bucket" {
-  name                     = "bucket${var.random_id}"
+resource "azurerm_storage_account" "mybucket" {
+  name                     = "bucket1${var.random_id}"
   resource_group_name      = azurerm_resource_group.example.name
   location                 = azurerm_resource_group.example.location
   account_tier             = "Standard"
@@ -57,9 +57,6 @@ resource "azurerm_subnet" "example" {
   resource_group_name  = azurerm_resource_group.example.name
   virtual_network_name = azurerm_virtual_network.example.name
   address_prefixes     = ["10.0.1.0/24"]
-  tags = {
-    randomID = var.random_id
-  }
 }
 
 resource "azurerm_network_interface" "example" {
@@ -83,6 +80,7 @@ resource "azurerm_linux_virtual_machine" "example" {
   location            = azurerm_resource_group.example.location
   size                = "Standard_F2"
   admin_username      = "adminuser"
+  disable_password_authentication = false
   network_interface_ids = [
     azurerm_network_interface.example.id,
   ]
